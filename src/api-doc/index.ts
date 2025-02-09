@@ -1,12 +1,13 @@
 import { swaggerUI } from "@hono/swagger-ui";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { getUsers } from "./handlers/user";
-import { getUsersRoute } from "./routes/user";
+import { userApi } from "@/api-doc/routes/user.js";
+import { taskApi } from "@/api-doc/routes/task.js";
 
 export const api = new OpenAPIHono();
 
 api
-  .openapi(getUsersRoute, getUsers)
+  .route("/users", userApi)
+  .route("/tasks", taskApi)
   .doc("/specification", {
     openapi: "3.0.0",
     info: {
